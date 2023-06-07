@@ -1,10 +1,10 @@
-#include "engine/Window.h"
+#include "Window.h"
 
 #include "MiniFB.h"
-#include "engine/Input.h"
-#include "engine/Timer.h"
-#include "engine/Logger.h"
-#include "engine/AudioManager.h"
+#include "Input.h"
+#include "Timer.h"
+#include "Logger.h"
+#include "AudioManager.h"
 
 #if defined(_WIN32)
     #include "malloc.h"

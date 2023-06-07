@@ -1,4 +1,4 @@
-#include "engine/Image.h"
+#include "Image.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -6,10 +6,9 @@
     #include "malloc.h"
 #endif
 
-#include "engine/Logger.h"
+#include "Logger.h"
 
 #include <cstring>
-#include <iostream>
 
 Image::Image()
 {
