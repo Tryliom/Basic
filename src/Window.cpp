@@ -93,6 +93,9 @@ void Window::Resize(uint32_t width, uint32_t height)
 
     _buffer = (int*) realloc(_buffer, width * height * sizeof(int));
 
+	memset(_buffer, 0, _width * _height * sizeof(int));
+
+	mfb_set_viewport(_window, 0, 0, width, height);
     mfb_update_ex(_window, _buffer, _width, _height);
 }
 
