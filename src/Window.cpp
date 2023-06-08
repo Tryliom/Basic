@@ -64,6 +64,8 @@ void Window::Update()
         }
     }
 
+    mfb_wait_sync(_window);
+
 	_frame++;
 }
 
@@ -96,7 +98,7 @@ void Window::DrawPixel(uint32_t index, int color)
     const auto g = (uint8_t) (srcG * srcAlpha + destG * destAlpha);
     const auto b = (uint8_t) (srcB * srcAlpha + destB * destAlpha);
 
-    color = MFB_RGB(r, g, b);
+    color = MFB_ARGB(0xFF, r, g, b);
 
     _buffer[index] = color;
 }
