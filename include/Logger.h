@@ -4,6 +4,6 @@
 
 namespace Logger
 {
-    void Log(std::string message);
-    void LogError(std::string message);
+    void Log(const std::string& message);
+    void LogError(const std::string& message);
 }

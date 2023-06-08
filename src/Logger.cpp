@@ -4,13 +4,13 @@
 
 namespace Logger
 {
-    void Log(std::string message)
+    void Log(const std::string& message)
     {
-        std::cout << message << std::endl;
+        std::cout << message << " from " << __LINE__ << std::endl;
     }
 
-    void LogError(std::string message)
+    void LogError(const std::string& message)
     {
-        std::cout << "[ERROR] " << message << std::endl;
+        std::cout << "[ERROR] " << message << " from " << __LINE__ << std::endl;
     }
 }
