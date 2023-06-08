@@ -39,7 +39,7 @@ Window::Window(uint32_t width, uint32_t height)
         _charsImage[sprite.charValue] = font.Cut(sprite.positionX, sprite.positionY, sprite.sourceWidth, sprite.sourceHeight);
     }
 
-    Logger::Log("Window created");
+    LOG("Window created");
 }
 
 void Window::Update()

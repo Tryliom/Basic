@@ -45,7 +45,7 @@ Image::Image(const char* filename)
 
 	if (pixels == nullptr)
 	{
-		Logger::LogError("Failed to load image: " + std::string(filename));
+		LOG_ERROR("Failed to load image: " + std::string(filename));
 		return;
 	}
 
