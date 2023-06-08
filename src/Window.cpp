@@ -49,15 +49,15 @@ Window::Window(uint32_t width, uint32_t height)
 
 void Window::Update()
 {
+    _display->Update(*this);
+    _display->Draw(*this);
+
     Input::Update();
 	Timer::Update();
 
     Frame   = (int) _frame;
     Width   = (int) _width;
     Height  = (int) _height;
-
-    _display->Update(*this);
-    _display->Draw(*this);
 
     int state = mfb_update_ex(_window, _buffer, _width, _height);
 
@@ -91,7 +91,9 @@ void Window::Resize(uint32_t width, uint32_t height)
     _width = width;
     _height = height;
 
-    mfb_set_viewport(_window, 0, 0, width, height);
+    _buffer = (int*) realloc(_buffer, width * height * sizeof(int));
+
+    mfb_update_ex(_window, _buffer, _width, _height);
 }
 
 void Window::DrawPixel(uint32_t index, int color)
