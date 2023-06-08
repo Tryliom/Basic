@@ -18,6 +18,11 @@ Window::Window(uint32_t width, uint32_t height)
 {
     _width = width;
     _height = height;
+    _frame = 0;
+
+    Width = (int) _width;
+    Height = (int) _height;
+    Frame = (int) _frame;
 
     _background = Color::Black;
 
@@ -47,6 +52,13 @@ void Window::Update()
     Input::Update();
 	Timer::Update();
 
+    Frame   = (int) _frame;
+    Width   = (int) _width;
+    Height  = (int) _height;
+
+    _display->Update(*this);
+    _display->Draw(*this);
+
     int state = mfb_update_ex(_window, _buffer, _width, _height);
 
     if (state < 0)
@@ -72,6 +84,14 @@ void Window::Update()
 bool Window::IsOpen()
 {
     return _window != nullptr;
+}
+
+void Window::Resize(uint32_t width, uint32_t height)
+{
+    _width = width;
+    _height = height;
+
+    mfb_set_viewport(_window, 0, 0, width, height);
 }
 
 void Window::DrawPixel(uint32_t index, int color)
@@ -329,4 +349,11 @@ Vector2I Window::GetMousePosition()
     position.Y = mfb_get_mouse_y(_window);
 
     return position;
+}
+
+void Window::SetDisplay(Display* display)
+{
+    _display = display;
+
+    _display->Init(*this);
 }

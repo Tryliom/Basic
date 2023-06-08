@@ -2,10 +2,12 @@
 
 #include <cstdint>
 #include <map>
+#include <utility>
 
 #include "Image.h"
 #include "Utility.h"
 #include "Font.h"
+#include "Display.h"
 
 class Window
 {
@@ -26,22 +28,25 @@ private:
     std::map<int, rtpAtlasSprite> _chars;
     std::map<int, Image> _charsImage;
 
+    Display* _display { nullptr };
+
     void DrawPixel(uint32_t index, int color);
 
     static Vector2I GetStartPosition(uint32_t width, uint32_t height, int x, int y, Pivot pivot);
     static Vector2I GetRotatedPosition(int x, int y, Image image, Pivot pivot);
 
 public:
-    [[nodiscard]] uint32_t GetFrame() const { return _frame; }
-
-    [[nodiscard]] uint32_t GetWidth() const { return _width; }
-    [[nodiscard]] uint32_t GetHeight() const { return _height; }
+    int Width;
+    int Height;
+    int Frame;
 
     [[nodiscard]] uint32_t GetBackgroundColor() const { return _background; }
     void SetBackgroundColor(int color) { _background = color; }
 
     void Update();
     bool IsOpen();
+    void SetDisplay(Display* display);
+    void Resize(uint32_t width, uint32_t height);
 
     void DrawPixel(uint32_t x, uint32_t y, int color);
 
