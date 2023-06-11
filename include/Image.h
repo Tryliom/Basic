@@ -25,6 +25,7 @@ private:
 	uint32_t _color = 0xFFFFFFFF;
 
 	void ApplyColor();
+	void ResetColor();
 
 public:
 	[[nodiscard]] uint32_t GetWidth() const { return _width; }

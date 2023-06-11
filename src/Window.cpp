@@ -338,7 +338,7 @@ void Window::DrawText(Text text)
                       position.X + _chars[c].charOffsetX + shadowOffset, position.Y + _chars[c].charOffsetY + shadowOffset, text.Pivot);
         }
 
-        _charsImage[c].SetColor(Color::White);
+        _charsImage[c].SetColor(text.Color);
 
         DrawImage(_charsImage[c], position.X + _chars[c].charOffsetX, position.Y + _chars[c].charOffsetY, text.Pivot);
 

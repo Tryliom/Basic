@@ -26,7 +26,7 @@ struct Text
     std::string Text;
     float Size { 32.f };
     Vector2I Position { 0, 0 };
-	uint32_t Color { 0xFFFFFFFF };
+	int Color { Color::White };
     Pivot Pivot { Pivot::TopLeft };
     bool Shadow { true };
 };

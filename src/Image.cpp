@@ -119,7 +119,11 @@ void Image::SetColor(int color)
 
 	_color = color;
 
-	if (changed) ApplyColor();
+	if (changed)
+	{
+		ResetColor();
+		ApplyColor();
+	}
 }
 
 void Image::ApplyColor()
@@ -161,4 +165,28 @@ Image Image::Cut(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
     }
 
     return { width, height, buffer };
+}
+
+void Image::ResetColor()
+{
+	_width = _originalWidth * _scale;
+	_height = _originalHeight * _scale;
+
+	free(_buffer);
+
+	_buffer = (int*) malloc(_width * _height * sizeof(int));
+
+	for (uint32_t y = 0; y < _height; y++)
+	{
+		for (uint32_t x = 0; x < _width; x++)
+		{
+			const uint32_t originalX = x / _scale;
+			const uint32_t originalY = y / _scale;
+
+			const uint32_t index = y * _width + x;
+			const uint32_t originalIndex = originalY * _originalWidth + originalX;
+
+			_buffer[index] = _originalBuffer[originalIndex];
+		}
+	}
 }

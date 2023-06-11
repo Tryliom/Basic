@@ -16,25 +16,49 @@ struct Vector2F
     {
         return { X - other.X, Y - other.Y };
     }
+
+	void operator +=(Vector2F other)
+	{
+		X += other.X;
+		Y += other.Y;
+	}
+
+	void operator -=(Vector2F other)
+	{
+		X -= other.X;
+		Y -= other.Y;
+	}
 };
 
 struct Vector2I
 {
-    int X;
-    int Y;
+	int X;
+	int Y;
 
-    explicit operator Vector2F() const
-    {
-        return { (float)X, (float)Y };
-    }
+	explicit operator Vector2F() const
+	{
+		return {(float) X, (float) Y};
+	}
 
-    Vector2I operator +(Vector2I other) const
-    {
-        return { X + other.X, Y + other.Y };
-    }
+	Vector2I operator+(Vector2I other) const
+	{
+		return {X + other.X, Y + other.Y};
+	}
 
-    Vector2I operator -(Vector2I other) const
-    {
-        return { X - other.X, Y - other.Y };
-    }
+	Vector2I operator-(Vector2I other) const
+	{
+		return {X - other.X, Y - other.Y};
+	}
+
+	void operator+=(Vector2I other)
+	{
+		X += other.X;
+		Y += other.Y;
+	}
+
+	void operator-=(Vector2I other)
+	{
+		X -= other.X;
+		Y -= other.Y;
+	}
 };
