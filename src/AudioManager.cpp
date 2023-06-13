@@ -11,6 +11,12 @@
 #include "stb_vorbis.c"
 #include "stb_vorbis.h"
 
+#ifdef __EMSCRIPTEN__
+#define AUDIO_PATH "assets/audio/"
+#else
+#define AUDIO_PATH "../assets/audio/"
+#endif
+
 float volume = 1.f;
 std::vector<Sample> audioBuffers = {};
 std::map<AudioType, Sample> audioSamples = {};
@@ -112,6 +118,10 @@ namespace AudioManager
         });
 
         // Load samples
+		audioSamples[AudioType::MainMenu] = loadSample(AUDIO_PATH "mainMenu.ogg");
+		audioSamples[AudioType::Play] = loadSample(AUDIO_PATH "play.ogg");
+		audioSamples[AudioType::GameOver] = loadSample(AUDIO_PATH "gameOver.ogg");
+		audioSamples[AudioType::Egg] = loadSample(AUDIO_PATH "egg.ogg");
     }
 
     void Play(AudioType audioType, bool repeat, float volume)
@@ -163,5 +173,10 @@ namespace AudioManager
 	void SetGlobalVolume(float volume)
 	{
 		volume = volume;
+	}
+
+	void StopAll()
+	{
+		audioBuffers.clear();
 	}
 }

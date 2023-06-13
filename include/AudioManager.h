@@ -13,7 +13,7 @@ struct Sample
 
 enum class AudioType
 {
-
+	MainMenu, Play, GameOver, Egg
 };
 
 namespace AudioManager
@@ -24,4 +24,5 @@ namespace AudioManager
     void Pause(AudioType audioType);
     void Resume(AudioType audioType);
 	void SetGlobalVolume(float volume);
+	void StopAll();
 }
