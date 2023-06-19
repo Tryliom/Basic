@@ -48,7 +48,9 @@ Window::Window(uint32_t width, uint32_t height)
 void Window::Update()
 {
     _display->Update(*this);
+	_display->UpdateButtons(*this);
     _display->Draw(*this);
+	_display->DrawButtons(*this);
 
     Input::Update();
 	Timer::Update();
@@ -154,13 +156,24 @@ void Window::DrawVerticalLine(uint32_t x, uint32_t y, uint32_t length, int color
     }
 }
 
-void Window::DrawRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color)
+void Window::DrawRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color, int lineWidth)
 {
-    DrawHorizontalLine(x, y, width, color);
-    DrawHorizontalLine(x, y + height - 1, width, color);
+	if (lineWidth == 1)
+	{
+		DrawHorizontalLine(x, y, width, color);
+		DrawHorizontalLine(x, y + height - 1, width, color);
 
-    DrawVerticalLine(x, y, height, color);
-    DrawVerticalLine(x + width - 1, y, height, color);
+		DrawVerticalLine(x, y, height, color);
+		DrawVerticalLine(x + width - 1, y, height, color);
+
+		return;
+	}
+
+	DrawFullRectangle(x, y, width, lineWidth, color);
+	DrawFullRectangle(x, y + height - lineWidth, width, lineWidth, color);
+
+	DrawFullRectangle(x, y, lineWidth, height, color);
+	DrawFullRectangle(x + width - lineWidth, y, lineWidth, height, color);
 }
 
 void Window::DrawFullRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color)

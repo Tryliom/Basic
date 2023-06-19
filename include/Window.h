@@ -54,7 +54,7 @@ public:
     void DrawVerticalLine(uint32_t x, uint32_t y, uint32_t length, int color);
 
     // Use top left pivot
-    void DrawRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color);
+    void DrawRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color, int lineWidth = 1);
     void DrawFullRectangle(uint32_t x, uint32_t y, uint32_t width, uint32_t height, int color);
 
     void DrawLine(Vector2I start, Vector2I end, int color);
