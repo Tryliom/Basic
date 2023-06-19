@@ -9,7 +9,7 @@ void Display::AddButton(Button button, const std::function<void(Window&)>& callb
 	_buttonCallbacks.push_back(callback);
 }
 
-Button Display::GetButton(int index) const
+Button& Display::GetButton(int index)
 {
 	return _buttons[index];
 }
@@ -28,6 +28,9 @@ void Display::UpdateButtons(Window& window)
 	for (auto i = 0; i < _buttons.size(); i++)
 	{
 		auto& button = _buttons[i];
+
+		if (!button.IsEnabled() || !button.IsVisible()) continue;
+
 		auto callback = _buttonCallbacks[i];
 		bool hovered = button.IsHovered(mousePosition);
 

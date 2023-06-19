@@ -22,7 +22,7 @@ protected:
 	void AddButton(Button button, const std::function<void(Window&)>& callback);
 	void ClearButtons();
 
-	[[nodiscard]] Button GetButton(int index) const;
+	[[nodiscard]] Button& GetButton(int index);
 
 public:
 	void Init(Window& window);
