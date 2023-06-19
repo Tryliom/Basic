@@ -4,7 +4,6 @@
 #include "Input.h"
 #include "Timer.h"
 #include "Logger.h"
-#include "AudioManager.h"
 
 #if defined(_WIN32)
     #include "malloc.h"
@@ -31,7 +30,6 @@ Window::Window(uint32_t width, uint32_t height)
 
     Input::Initialize(_window);
 	Timer::Init();
-    AudioManager::Init();
 
     // Assign each chars to an image using char value as index
     auto font = Image(ATLAS_FONT_IMAGE_PATH);

@@ -11,18 +11,14 @@ struct Sample
     float Volume;
 };
 
-enum class AudioType
-{
-	MainMenu, Play, GameOver, Egg
-};
-
 namespace AudioManager
 {
     void Init();
-    void Play(AudioType audioType, bool repeat = false, float volume = 1.f);
-    void Stop(AudioType audioType);
-    void Pause(AudioType audioType);
-    void Resume(AudioType audioType);
+	void AddSample(int audioType, const char* path);
+    void Play(int audioType, bool repeat = false, float volume = 1.f);
+    void Stop(int audioType);
+    void Pause(int audioType);
+    void Resume(int audioType);
 	void SetGlobalVolume(float volume);
 	void StopAll();
 }

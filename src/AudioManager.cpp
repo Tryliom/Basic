@@ -11,15 +11,9 @@
 #include "stb_vorbis.c"
 #include "stb_vorbis.h"
 
-#ifdef __EMSCRIPTEN__
-#define AUDIO_PATH "assets/audio/"
-#else
-#define AUDIO_PATH "../assets/audio/"
-#endif
-
 float volume = 1.f;
 std::vector<Sample> audioBuffers = {};
-std::map<AudioType, Sample> audioSamples = {};
+std::map<int, Sample> audioSamples = {};
 
 void audioCallback(float* buffer, int numFrames, int numChannels)
 {
@@ -116,15 +110,14 @@ namespace AudioManager
                 .func = slog_func
             }
         });
-
-        // Load samples
-		audioSamples[AudioType::MainMenu] = loadSample(AUDIO_PATH "mainMenu.ogg");
-		audioSamples[AudioType::Play] = loadSample(AUDIO_PATH "play.ogg");
-		audioSamples[AudioType::GameOver] = loadSample(AUDIO_PATH "gameOver.ogg");
-		audioSamples[AudioType::Egg] = loadSample(AUDIO_PATH "egg.ogg");
     }
 
-    void Play(AudioType audioType, bool repeat, float volume)
+	void AddSample(int audioType, const char* path)
+	{
+		audioSamples[audioType] = loadSample(path);
+	}
+
+    void Play(int audioType, bool repeat, float volume)
     {
         audioBuffers.push_back(audioSamples[audioType]);
 
@@ -135,7 +128,7 @@ namespace AudioManager
         audioBuffer.IsPlaying = true;
     }
 
-    void Stop(AudioType audioType)
+    void Stop(int audioType)
     {
         for (auto i = 0; i < audioBuffers.size(); i++)
         {
@@ -148,7 +141,7 @@ namespace AudioManager
         }
     }
 
-    void Pause(AudioType audioType)
+    void Pause(int audioType)
     {
         for (auto & audioBuffer : audioBuffers)
         {
@@ -159,7 +152,7 @@ namespace AudioManager
         }
     }
 
-    void Resume(AudioType audioType)
+    void Resume(int audioType)
     {
         for (auto & audioBuffer : audioBuffers)
         {
